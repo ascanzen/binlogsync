@@ -53,11 +53,11 @@ class MysqlEvConsoleHandler(IEventHandler):
                 indent=self.indent,
                 default=self.json_encoder_default, ))
 
-    def on_insert(self, ev_id, ev_timestamp, schema, table, affected_rows):
+    def on_insert(self, ev_id, ev_timestamp, schema, table, affected_rows,ev):
         self.dump(ev_id, ev_timestamp, schema, table, affected_rows)
 
-    def on_update(self, ev_id, ev_timestamp, schema, table, affected_rows):
+    def on_update(self, ev_id, ev_timestamp, schema, table, affected_rows,ev):
         self.dump(ev_id, ev_timestamp, schema, table, affected_rows)
 
-    def on_delete(self, ev_id, ev_timestamp, schema, table, affected_rows):
+    def on_delete(self, ev_id, ev_timestamp, schema, table, affected_rows,ev):
         self.dump(ev_id, ev_timestamp, schema, table, affected_rows)

@@ -3,7 +3,11 @@ from __future__ import absolute_import, unicode_literals
 import json
 import io
 from pymysqlreplication import BinLogStreamReader
-
+from pymysqlreplication.row_event import (
+    WriteRowsEvent,
+    UpdateRowsEvent,
+    DeleteRowsEvent
+)
 
 class MysqlEventStream(object):
     def __init__(self,
@@ -38,8 +42,8 @@ class MysqlEventStream(object):
             log_pos=self.log_pos,
             resume_stream=True,
             blocking=False,
-            freeze_schema=True,
-            only_schemas=only_schemas, )
+            freeze_schema=False,
+            only_events=[WriteRowsEvent, UpdateRowsEvent, DeleteRowsEvent],)
 
     def __iter__(self):
         for ev in self.binlog_stream_reader:
